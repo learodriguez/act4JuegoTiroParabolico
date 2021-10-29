@@ -1,3 +1,9 @@
+'''Herramientas Computacionales: El Arte de la Programación
+Grupo: 201   TC1001S
+Modified by:
+        Léa Rodríguez Jouault A01659896   
+        Mauricio Juárez Sánchez A01660336'''
+
 from random import randrange
 from turtle import *
 from freegames import vector
@@ -6,7 +12,7 @@ ball = vector(-200, -200)
 speed = vector(0, 0)
 targets = []
 
-def tap(x, y):
+def tap(x, y): # movimiento del proyectil dentro del espacio acordado
     "Respond to screen tap."
     if not inside(ball):
         ball.x = -199
@@ -14,9 +20,10 @@ def tap(x, y):
         speed.x = (x + 200) / 25
         speed.y = (y + 200) / 25
 
+# límite del espacio en el que interactúan el proyectil y los balones
 def inside(xy):
     "Return True if xy within screen."
-    return -200 < xy.x < 200 and -200 < xy.y < 200
+    return -200 < xy.x < 200 and -200 < xy.y < 200 
 
 def draw():
     "Draw ball and targets."
@@ -24,18 +31,18 @@ def draw():
 
     for target in targets:
         goto(target.x, target.y)
-        dot(20, 'blue')
+        dot(20, 'blue') # tamaño de los balones
 
     if inside(ball):
         goto(ball.x, ball.y)
-        dot(6, 'red')
+        dot(6, 'red') # tamaño del proyectil
 
     update()
 
 def move():
     "Move ball and targets."
     if randrange(40) == 0:
-        y = randrange(-150, 150)
+        y = randrange(-150, 150) # los balones aparecerán dentro de ese rango en y
         target = vector(200, y)
         targets.append(target)
 
@@ -61,7 +68,7 @@ def move():
 
     ontimer(move, 30) # de igual manera se puede modificar aquí
 
-setup(420, 420, 370, 0)
+setup(420, 420, 370, 0) # tamaño del espacio en pantalla
 hideturtle()
 up()
 tracer(False)
