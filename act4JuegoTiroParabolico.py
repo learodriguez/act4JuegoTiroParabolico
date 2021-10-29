@@ -1,9 +1,3 @@
-'''Herramientas Computacionales: El Arte de la Programación
-Grupo: 201   TC1001S
-Modified by:
-        Léa Rodríguez Jouault A01659896   
-        Mauricio Juárez Sánchez A01660336'''
-
 from random import randrange
 from turtle import *
 from freegames import vector
@@ -12,7 +6,7 @@ ball = vector(-200, -200)
 speed = vector(0, 0)
 targets = []
 
-def tap(x, y): # movimiento del proyectil dentro del espacio acordado
+def tap(x, y):
     "Respond to screen tap."
     if not inside(ball):
         ball.x = -199
@@ -20,10 +14,9 @@ def tap(x, y): # movimiento del proyectil dentro del espacio acordado
         speed.x = (x + 200) / 25
         speed.y = (y + 200) / 25
 
-# límite del espacio en el que interactúan el proyectil y los balones
 def inside(xy):
     "Return True if xy within screen."
-    return -200 < xy.x < 200 and -200 < xy.y < 200 
+    return -200 < xy.x < 200 and -200 < xy.y < 200
 
 def draw():
     "Draw ball and targets."
@@ -31,18 +24,18 @@ def draw():
 
     for target in targets:
         goto(target.x, target.y)
-        dot(20, 'blue') # tamaño de los balones
+        dot(20, 'blue')
 
     if inside(ball):
         goto(ball.x, ball.y)
-        dot(6, 'red') # tamaño del proyectil
+        dot(6, 'red')
 
     update()
 
 def move():
     "Move ball and targets."
     if randrange(40) == 0:
-        y = randrange(-150, 150) # los balones aparecerán dentro de ese rango en y
+        y = randrange(-150, 150)
         target = vector(200, y)
         targets.append(target)
 
@@ -64,11 +57,13 @@ def move():
 
     for target in targets:
         if not inside(target):
-            return
+            # Se vuelve a generar nuevos targets, los que se pasan del límite desaparecen 
+            target.x = 200 
+            target.y = randrange(-150,150)
 
     ontimer(move, 30) # de igual manera se puede modificar aquí
 
-setup(420, 420, 370, 0) # tamaño del espacio en pantalla
+setup(420, 420, 370, 0)
 hideturtle()
 up()
 tracer(False)
